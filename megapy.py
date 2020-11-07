@@ -29,7 +29,9 @@ from itertools import takewhile,repeat
 import numpy as np
 
 
-## http://www1.caixa.gov.br/loterias/_arquivos/loterias/D_mgsasc.zip
+## http://www1.caixa.gov.br/loterias/_arquivos/loterias/D_mgsasc.zip Mega
+## http://www1.caixa.gov.br/loterias/_arquivos/loterias/D_lotfac.zip lotoFacil
+
 ##http://www.estatisticasdamegasena.com.br/site/?p=est_home&lot=meg&sub=est&est=1
 ##http://www.mega-sena.org/como-ganhar-e-como-jogar
 ##http://www1.caixa.gov.br/app/loterias/mega-sena.html
@@ -90,7 +92,7 @@ def popupmsg(tit,msg):
     popup.wm_title(tit)
     label = ttk.Label(popup, text=msg, font=DEFAULT_FONT)
     label.pack(side="top", fill="both", pady=10, expand=True)
-    B1 = ttk.Button(popup, text="Okay", command = popup.close)
+    B1 = ttk.Button(popup, text="Ok", command = popup.destroy)
     B1.pack()
     popup.mainloop()
 
@@ -112,7 +114,7 @@ def makeData():
     with zipfile.ZipFile('D_mgsasc.zip') as zf:
         zf.extractall()
 
-    bsObj = BeautifulSoup(open("d_megasc.htm"),"html.parser")
+    bsObj = BeautifulSoup(open("d_megasc.htm",'rb'),"html.parser")
 
 
     data = bsObj.findAll('td')
@@ -187,7 +189,7 @@ def makeData():
             gData.write(records)
             gData.write("\n")
 
-        print ("Arquivo de jogos salvo com sucesso")
+#        print ("Arquivo de jogos salvo com sucesso")
         
         #print(lista[0]+lista[1]+lista[2]+lista[3]+lista[5])
 
@@ -275,35 +277,20 @@ class StartPage(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self,parent)
-##
-##        senha = Entry(self,show="*")
-##        senha.insert(10,"bolinha")
-##        senha.pack()
-##        print( senha.get())
-##        passwd = senha.get()
-##        ttk.Button(self, text="Ok", command=lambda: popupmsg("About",passwd)).pack()
 
-        tk.Label(self, text="Start Page", font=LARGE_FONT).grid(row=0,column=24,padx=10)
+        tk.Label(self, text="Start Page", font=LARGE_FONT).place(relx=0.45,rely=0.05)
 
-        tk.Label(self, text="01 02 03 04 05 ", font=LARGE_FONT).grid(row=2,column=5);
-        tk.Label(self, text="06 07 08 09 10 ", font=LARGE_FONT).grid(row=2,column=5)
-        tk.Label(self, text="11 12 13 14 15 ", font=LARGE_FONT).grid(row=3,column=5);
-        tk.Label(self, text="16  17  18  19  20 ", font=LARGE_FONT).grid(row=3,column=5)
-        tk.Label(self, text="21 22 23 24 25 ", font=LARGE_FONT).grid(row=4,column=5);
-        tk.Label(self, text="26 27 28 29 30 ", font=LARGE_FONT).grid(row=4,column=5)
-        tk.Label(self, text="", font=LARGE_FONT).grid(row=5,column=5);
-        tk.Label(self, text="", font=LARGE_FONT).grid(row=2,column=5)
-        tk.Label(self, text="31 32 33 34 45 ", font=LARGE_FONT).grid(row=6,column=5);
-        tk.Label(self, text="36 37 38 49 40 ", font=LARGE_FONT).grid(row=6,column=5)
-        tk.Label(self, text="41 42 43 44 45 ", font=LARGE_FONT).grid(row=7,column=5);
-        tk.Label(self, text="46 47 48 49 50 ", font=LARGE_FONT).grid(row=7,column=5)
-        tk.Label(self, text="51 52 53 54 55 ", font=LARGE_FONT).grid(row=8,column=5);
-        tk.Label(self, text="56 57 58 59 60 ", font=LARGE_FONT).grid(row=8,column=5)
-        ttk.Labelframe(parent, text='Label').grid(row=9)
+        tk.Label(self, text="01 02 03 04 05 06 07 08 09 10", font=LARGE_FONT).place(relx=0.45,rely=0.10)
+        tk.Label(self, text="11 12 13 14 15 16 17 18 19 20", font=LARGE_FONT).place(relx=0.45,rely=0.15)
+        tk.Label(self, text="21 22 23 24 25 26 27 28 29 30", font=LARGE_FONT).place(relx=0.45,rely=0.20)
+#        tk.Label(self, text="", font=LARGE_FONT).place(relx=0.5 ,rely=0.2)
+        tk.Label(self, text="31 32 33 34 35 36 37 38 49 40", font=LARGE_FONT).place(relx=0.45,rely=0.25)
+        tk.Label(self, text="41 42 43 44 45 46 47 48 49 50", font=LARGE_FONT).place(relx=0.45,rely=0.30)
+        tk.Label(self, text="51 52 53 54 55 56 57 58 59 60", font=LARGE_FONT).place(relx=0.45,rely=0.35)
 
-        ttk.Button(self, text="Graph Page",command=lambda: controller.show_frame(Mega_chart)).grid(row=10,column=6)
+        ttk.Button(self, text="Graph Page",command=lambda: controller.show_frame(Mega_chart)).place(relx=0.5,rely=0.9)
+        ttk.Button(self, text="EXIT",command=quit).place(relx=0.9,rely=0.9)
 
-##        popupmsg("Atualizando Dados",makeData())
 
 
 class Mega_chart(tk.Frame):
@@ -329,17 +316,20 @@ class Mega_chart(tk.Frame):
 def About():
     About = tk.Toplevel()
     About.wm_title("About")
-    ttk.Label(About, text="About Mega Client", font=LARGE_FONT).grid(row=0,rowspan=3,column=0,columnspan=4,pady=10)
+    ttk.Label(About, text="About Loteria Tkinter Client", font=LARGE_FONT).grid(row=0,rowspan=3,column=0,columnspan=4,pady=10)
 
-    logo = PhotoImage(file="t2.gif")
-    ttk.Label(About, image=logo).grid(row=4,column=0).pack(side="left")
-    explanation = """At present, only GIF and PPM/PGM
-    formats are supported, but an interface
-    exists to allow additional image file
-    formats to be added easily."""
-    ttk.Label(About, justify=LEFT, text=explanation, font=DEFAULT_FONT).grid(row=4,column=3).pack(side="right")
+    logo = PhotoImage(file="ico/mega.gif")
+    logo2 = PhotoImage(file="ico/lotofacil.gif")
+    ttk.Label(About, image=logo).grid(row=4,column=0)
+    ttk.Label(About, image=logo2).grid(row=5,column=0)
 
-    ttk.Button(About, text="Okay", command = About.destroy).grid(row=6,column=2)
+    explanation = "At present, only GIF and PPM/PGM formats are supported, but an interface exists to allow additional image file formats to be added easily."
+
+    ttk.Label(About, justify=LEFT, text=explanation, font=DEFAULT_FONT).grid(row=5,column=2)
+    
+    ttk.Button(About, text="0x0", command = About.destroy).place(relx = 0.0, rely = 0.0)
+    ttk.Button(About, text="0x5", command = About.destroy).place(relx = 0.5, rely = 0.5)
+    #ttk.Button(About, text="Ok", command = About.destroy).grid(row=6,column=2)
 
     About.mainloop()
 
@@ -353,3 +343,5 @@ except:
     with open("graphData.txt","w")as gdata:
         gdata.write("")
 app.mainloop()
+
+#rm *.zip *.htm *.gif
