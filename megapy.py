@@ -141,7 +141,7 @@ def makeData():
         lastLine = int(lockvalue)
         print("Arquivo Lock encontrado \nContinuando a execução da ultima linha executada!")
         print (lastLine)
-##        popupmsg("Alerta","Arquivo Lock encontrado \nContinuando a execução da ultima linha executada!\n\n lastLine")
+        popupmsg("Alerta","Arquivo Lock encontrado \nContinuando a execução da ultima linha executada!\n\n lastLine")
 
     except:
         print ("Criando arquivo Lock")
@@ -246,7 +246,6 @@ class MegaPy(tk.Tk):
         Data.add_command(label="Make Data Graph", command = makeData)
         menubar.add_cascade(label="Data", menu=Data)
 
-
         Help = tk.Menu(menubar, tearoff=0)
         Help.add_command(label="About", command = About)
         menubar.add_cascade(label="Help", menu=Help)
@@ -331,7 +330,45 @@ def About():
     ttk.Button(About, text="0x5", command = About.destroy).place(relx = 0.5, rely = 0.5)
     #ttk.Button(About, text="Ok", command = About.destroy).grid(row=6,column=2)
 
+    ttk.Label(About, image=fadLogo).grid(row=4,column=2)
+
     About.mainloop()
+
+
+def fadergs()
+
+    fadergs = tk.Toplevel()
+    fadergs.wm_title("About")
+    ttk.Label(About, text="Sobre a Nupeti", font=LARGE_FONT).grid(row=0,rowspan=3,column=0,columnspan=4,pady=10)
+
+
+
+    logo = PhotoImage(file="ico/mega.gif")
+    logo2 = PhotoImage(file="ico/lotofacil.gif")
+    ttk.Label(About, image=logo).grid(row=4,column=0)
+    ttk.Label(About, image=logo2).grid(row=5,column=0)
+
+    txt = "Metodologias Ativas
+
+     O foco das metodologias ativas está em você, estudante, e não mais no professor. Assim, é preciso aprender a aprender, ter autonomia no processo de ensino-aprendizagem e participar efetivamente na construção do conhecimento e no desenvolvimento de competências, por meio de diferentes formas de experimentação e compartilhamento dentro e fora da sala de aula. Assim, os docentes passam a ser mediadores desse processo. Além disso, todas as possibilidades do mundo digital estão disponíveis para que você seja um estudante e um profissional de sucesso.
+
+    Os Núcleos de Práticas em Negócios, Núcleos de Práticas Jurídicas, o Núcleo de Práticas Contábeis, e o Núcleo de Práticas de TI estão voltados para a prática de suas habilidades na vida real. São oferecidos cursos, workshops, visitas técnicas em cada uma dessas áreas. Estes núcleos, prestam serviços gratuitos à comunidade onde são realizadas ações solidárias.  Você tem a oportuniade de praticar o que foi aprendido e de fazer o bem, “Here for good”, que é um dos objetivos de toda a Rede Laureate."
+
+
+    fadBG   = PhotoImage(file="bg.gif")
+    ttk.Label(About, image=fadBG).place(x=0, y=0, relwidth=1, relheight=1)
+
+    ttk.Label(About, justify=LEFT, text=explanation, font=DEFAULT_FONT).grid(row=5,column=2)
+    
+    ttk.Button(About, text="sair", command = About.destroy).place(relx = 0.5, rely = 0.9)
+
+#    ttk.Label(About, image=fadLogo).grid(row=4,column=2)
+
+    fadergs.mainloop()
+   
+
+
+
 
 
 
